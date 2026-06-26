@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -52,10 +53,25 @@ function FundCard({ ticker, name, price }: { ticker: string; name: string; price
 export default function Page() {
   return (
     <>
-      <section className="flex min-h-svh items-center justify-center">
-        <h1 className="text-6xl font-bold uppercase tracking-widest sm:text-8xl">
-          Grayscale<span className="text-lg align-top">&reg;</span>
-        </h1>
+      <section className="relative flex min-h-[85vh] items-center px-6 py-24">
+        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-transparent via-transparent to-violet-100/50" />
+        <div className="max-w-3xl">
+          <h1 className="text-5xl font-bold leading-tight tracking-tight sm:text-7xl">
+            Digital Asset Investing Fundamentals Course
+          </h1>
+          <p className="mt-6 max-w-xl text-lg text-muted-foreground">
+            Master the foundations of investing in crypto assets with
+            Grayscale&apos;s five-class, CE-credit course.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Button size="lg" className="uppercase tracking-wider">
+              Class 2: Register Now
+            </Button>
+            <Button size="lg" variant="outline" className="uppercase tracking-wider">
+              See Syllabus
+            </Button>
+          </div>
+        </div>
       </section>
 
       <section className="px-6 py-24">
