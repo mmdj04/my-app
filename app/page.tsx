@@ -1,5 +1,6 @@
-import { Building2, CreditCard, Wrench, BarChart3 } from "lucide-react"
+import { Building2, CreditCard, Wrench, BarChart3, Bed, Bath, Maximize } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
 
 const features = [
   {
@@ -25,6 +26,69 @@ const features = [
     title: "Analytics & Reports",
     description:
       "Real-time insights on occupancy, revenue, and portfolio performance across all regions.",
+  },
+]
+
+const properties = [
+  {
+    title: "Modern Loft",
+    location: "New York, USA",
+    price: "$4,200/mo",
+    beds: 2,
+    baths: 2,
+    sqm: 120,
+    status: "For Rent",
+    gradient: "from-zinc-700 to-zinc-500",
+  },
+  {
+    title: "Beachfront Villa",
+    location: "Dubai, UAE",
+    price: "$8,500/mo",
+    beds: 3,
+    baths: 3,
+    sqm: 200,
+    status: "For Sale",
+    gradient: "from-sky-700 to-sky-500",
+  },
+  {
+    title: "City Penthouse",
+    location: "London, UK",
+    price: "$6,800/mo",
+    beds: 2,
+    baths: 2,
+    sqm: 150,
+    status: "For Rent",
+    gradient: "from-slate-700 to-slate-500",
+  },
+  {
+    title: "Tropical Villa",
+    location: "Bali, Indonesia",
+    price: "$3,100/mo",
+    beds: 4,
+    baths: 3,
+    sqm: 350,
+    status: "For Sale",
+    gradient: "from-emerald-700 to-emerald-500",
+  },
+  {
+    title: "Mountain Lodge",
+    location: "Zurich, Switzerland",
+    price: "$12,000/mo",
+    beds: 5,
+    baths: 4,
+    sqm: 500,
+    status: "For Sale",
+    gradient: "from-amber-700 to-amber-500",
+  },
+  {
+    title: "Urban Studio",
+    location: "Tokyo, Japan",
+    price: "$2,800/mo",
+    beds: 1,
+    baths: 1,
+    sqm: 45,
+    status: "For Rent",
+    gradient: "from-rose-700 to-rose-500",
   },
 ]
 
@@ -89,6 +153,71 @@ export default function Page() {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Properties Catalog */}
+      <section className="border-y border-black/10 bg-[#ededed] px-6 py-24">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">
+            Featured Properties
+          </h2>
+          <p className="mb-12 max-w-lg text-muted-foreground">
+            Explore our curated portfolio of premium properties across the
+            globe.
+          </p>
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {properties.map((property) => (
+              <Card
+                key={property.title}
+                className="group cursor-pointer overflow-hidden border-black/5 bg-white transition-shadow hover:shadow-md"
+              >
+                <div
+                  className={`relative h-48 bg-gradient-to-br ${property.gradient}`}
+                >
+                  <span
+                    className={`absolute left-3 top-3 rounded-full px-3 py-1 text-xs font-medium ${
+                      property.status === "For Sale"
+                        ? "bg-emerald-500/90 text-white"
+                        : "bg-white/90 text-foreground"
+                    }`}
+                  >
+                    {property.status}
+                  </span>
+                </div>
+                <CardContent className="p-5">
+                  <h3 className="text-lg font-semibold">{property.title}</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    {property.location}
+                  </p>
+                  <div className="mt-4 flex items-center gap-4 text-xs text-muted-foreground">
+                    <span className="flex items-center gap-1">
+                      <Bed className="size-3.5" /> {property.beds} beds
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Bath className="size-3.5" /> {property.baths} baths
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Maximize className="size-3.5" /> {property.sqm}m&sup2;
+                    </span>
+                  </div>
+                  <div className="mt-4 flex items-center justify-between">
+                    <span className="text-xl font-bold">{property.price}</span>
+                    <span className="text-sm font-medium text-muted-foreground transition-colors group-hover:text-foreground">
+                      View details &rarr;
+                    </span>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <Button variant="outline" size="lg" className="uppercase tracking-wider">
+              View All Properties
+            </Button>
           </div>
         </div>
       </section>
