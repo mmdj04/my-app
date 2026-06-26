@@ -36,7 +36,7 @@ function FundGrid({ items }: { items: Fund[] }) {
 export default function Page() {
   return (
     <>
-      <section className="relative flex min-h-[60vh] items-center bg-[oklch(0.205_0_0)] px-6 py-16 text-white">
+      <section className="relative flex min-h-[70vh] items-center bg-[oklch(0.205_0_0)] px-6 py-20 text-white">
         <div className="absolute inset-0 -z-10 bg-gradient-to-br from-transparent via-transparent to-violet-900/30" />
         <div className="max-w-3xl">
           <h1 className="text-5xl font-bold leading-tight tracking-tight sm:text-7xl">
