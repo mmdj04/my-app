@@ -35,27 +35,27 @@ export function SearchFilters({ onSearch }: SearchFiltersProps) {
   }
 
   return (
-    <div className="w-full rounded-xl bg-[#ededed] p-4 shadow-lg ring-1 ring-black/5 md:p-6">
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-6">
+    <div className="w-full rounded-xl border border-gray-200 bg-white p-5 shadow-lg md:p-6">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-6">
         <div className="lg:col-span-2">
-          <label className="mb-1 block text-xs font-medium text-muted-foreground">
+          <label className="mb-1.5 block text-[11px] font-semibold tracking-widest uppercase text-gray-400">
             Localização
           </label>
           <div className="relative">
-            <Search className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
+            <Search className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-gray-400" />
             <Input
               placeholder="Bairro, cidade ou estado"
-              className="pl-9"
+              className="border-gray-200 pl-9 focus-visible:border-[#2e234a] focus-visible:ring-[#2e234a]/20"
             />
           </div>
         </div>
 
         <div>
-          <label className="mb-1 block text-xs font-medium text-muted-foreground">
-            Tipo de imóvel
+          <label className="mb-1.5 block text-[11px] font-semibold tracking-widest uppercase text-gray-400">
+            Tipo
           </label>
           <Select>
-            <SelectTrigger className="w-full">
+            <SelectTrigger className="border-gray-200 focus-visible:border-[#2e234a] focus-visible:ring-[#2e234a]/20">
               <SelectValue placeholder="Todos" />
             </SelectTrigger>
             <SelectContent>
@@ -69,11 +69,11 @@ export function SearchFilters({ onSearch }: SearchFiltersProps) {
         </div>
 
         <div>
-          <label className="mb-1 block text-xs font-medium text-muted-foreground">
+          <label className="mb-1.5 block text-[11px] font-semibold tracking-widest uppercase text-gray-400">
             Finalidade
           </label>
           <Select>
-            <SelectTrigger className="w-full">
+            <SelectTrigger className="border-gray-200 focus-visible:border-[#2e234a] focus-visible:ring-[#2e234a]/20">
               <SelectValue placeholder="Todas" />
             </SelectTrigger>
             <SelectContent>
@@ -85,11 +85,11 @@ export function SearchFilters({ onSearch }: SearchFiltersProps) {
         </div>
 
         <div>
-          <label className="mb-1 block text-xs font-medium text-muted-foreground">
+          <label className="mb-1.5 block text-[11px] font-semibold tracking-widest uppercase text-gray-400">
             Preço mínimo
           </label>
           <Select>
-            <SelectTrigger className="w-full">
+            <SelectTrigger className="border-gray-200 focus-visible:border-[#2e234a] focus-visible:ring-[#2e234a]/20">
               <SelectValue placeholder="Min" />
             </SelectTrigger>
             <SelectContent>
@@ -104,11 +104,11 @@ export function SearchFilters({ onSearch }: SearchFiltersProps) {
         </div>
 
         <div>
-          <label className="mb-1 block text-xs font-medium text-muted-foreground">
+          <label className="mb-1.5 block text-[11px] font-semibold tracking-widest uppercase text-gray-400">
             Quartos
           </label>
           <Select>
-            <SelectTrigger className="w-full">
+            <SelectTrigger className="border-gray-200 focus-visible:border-[#2e234a] focus-visible:ring-[#2e234a]/20">
               <SelectValue placeholder="Qualquer" />
             </SelectTrigger>
             <SelectContent>
@@ -122,14 +122,17 @@ export function SearchFilters({ onSearch }: SearchFiltersProps) {
         </div>
       </div>
 
-      <div className="mt-4 flex items-center justify-between">
-        <p className="text-sm text-muted-foreground">
-          <span className="font-semibold text-foreground">12 imóveis</span>{" "}
+      <div className="mt-5 flex items-center justify-between border-t border-gray-100 pt-5">
+        <p className="text-sm text-gray-400">
+          <span className="font-semibold text-[#2e234a]">12 imóveis</span>{" "}
           encontrados
         </p>
-        <Button onClick={handleSearch} className="gap-2">
+        <Button
+          onClick={handleSearch}
+          className="gap-2 bg-[#2e234a] px-6 text-sm tracking-wide hover:bg-[#3d2f5e]"
+        >
           <Search className="size-4" />
-          Buscar imóveis
+          Buscar
         </Button>
       </div>
     </div>
