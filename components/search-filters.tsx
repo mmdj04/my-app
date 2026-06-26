@@ -45,7 +45,7 @@ export function SearchFilters({ onSearch }: SearchFiltersProps) {
             <Search className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-gray-400" />
             <Input
               placeholder="Bairro, cidade ou estado"
-              className="border-gray-200 pl-9 focus-visible:border-[#2e234a] focus-visible:ring-[#2e234a]/20"
+              className="border-gray-200 pl-9 focus-visible:border-[hsl(257,36%,21%)] focus-visible:ring-[hsl(257,36%,21%)]/20"
             />
           </div>
         </div>
@@ -55,7 +55,7 @@ export function SearchFilters({ onSearch }: SearchFiltersProps) {
             Tipo
           </label>
           <Select>
-            <SelectTrigger className="border-gray-200 focus-visible:border-[#2e234a] focus-visible:ring-[#2e234a]/20">
+            <SelectTrigger className="border-gray-200 focus-visible:border-[hsl(257,36%,21%)] focus-visible:ring-[hsl(257,36%,21%)]/20">
               <SelectValue placeholder="Todos" />
             </SelectTrigger>
             <SelectContent>
@@ -73,7 +73,7 @@ export function SearchFilters({ onSearch }: SearchFiltersProps) {
             Finalidade
           </label>
           <Select>
-            <SelectTrigger className="border-gray-200 focus-visible:border-[#2e234a] focus-visible:ring-[#2e234a]/20">
+            <SelectTrigger className="border-gray-200 focus-visible:border-[hsl(257,36%,21%)] focus-visible:ring-[hsl(257,36%,21%)]/20">
               <SelectValue placeholder="Todas" />
             </SelectTrigger>
             <SelectContent>
@@ -89,7 +89,7 @@ export function SearchFilters({ onSearch }: SearchFiltersProps) {
             Preço mínimo
           </label>
           <Select>
-            <SelectTrigger className="border-gray-200 focus-visible:border-[#2e234a] focus-visible:ring-[#2e234a]/20">
+            <SelectTrigger className="border-gray-200 focus-visible:border-[hsl(257,36%,21%)] focus-visible:ring-[hsl(257,36%,21%)]/20">
               <SelectValue placeholder="Min" />
             </SelectTrigger>
             <SelectContent>
@@ -108,7 +108,7 @@ export function SearchFilters({ onSearch }: SearchFiltersProps) {
             Quartos
           </label>
           <Select>
-            <SelectTrigger className="border-gray-200 focus-visible:border-[#2e234a] focus-visible:ring-[#2e234a]/20">
+            <SelectTrigger className="border-gray-200 focus-visible:border-[hsl(257,36%,21%)] focus-visible:ring-[hsl(257,36%,21%)]/20">
               <SelectValue placeholder="Qualquer" />
             </SelectTrigger>
             <SelectContent>
@@ -124,12 +124,12 @@ export function SearchFilters({ onSearch }: SearchFiltersProps) {
 
       <div className="mt-5 flex items-center justify-between border-t border-gray-100 pt-5">
         <p className="text-sm text-gray-400">
-          <span className="font-semibold text-[#2e234a]">12 imóveis</span>{" "}
+          <span className="font-semibold text-[hsl(257,36%,21%)]">12 imóveis</span>{" "}
           encontrados
         </p>
         <Button
           onClick={handleSearch}
-          className="gap-2 bg-[#2e234a] px-6 text-sm tracking-wide hover:bg-[#3d2f5e]"
+          className="gap-2 bg-[hsl(257,36%,21%)] px-6 text-sm tracking-wide hover:bg-[hsl(257,36%,28%)]"
         >
           <Search className="size-4" />
           Buscar

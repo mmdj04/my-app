@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import {
   Home,
   Building2,
@@ -15,6 +15,11 @@ import {
   Mail,
   MapPinned,
   HelpCircle,
+  Search,
+  Eye,
+  Key,
+  Star,
+  Quote,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { PropertyCard } from "@/components/property-card"
@@ -42,19 +47,19 @@ function CarouselControls() {
         <button
           onClick={scrollPrev}
           disabled={!canScrollPrev}
-          className="flex size-11 items-center justify-center border border-gray-300 bg-transparent text-gray-400 transition-colors hover:border-[#2e234a] hover:text-[#2e234a] disabled:opacity-30 disabled:hover:border-gray-300 disabled:hover:text-gray-400"
+          className="flex size-11 items-center justify-center border border-gray-300 bg-transparent text-gray-400 transition-colors hover:border-[hsl(257,36%,21%)] hover:text-[hsl(257,36%,21%)] disabled:opacity-30 disabled:hover:border-gray-300 disabled:hover:text-gray-400"
         >
           <ChevronLeft className="size-5" />
         </button>
         <button
           onClick={scrollNext}
           disabled={!canScrollNext}
-          className="flex size-11 items-center justify-center border border-gray-300 bg-transparent text-gray-400 transition-colors hover:border-[#2e234a] hover:text-[#2e234a] disabled:opacity-30 disabled:hover:border-gray-300 disabled:hover:text-gray-400"
+          className="flex size-11 items-center justify-center border border-gray-300 bg-transparent text-gray-400 transition-colors hover:border-[hsl(257,36%,21%)] hover:text-[hsl(257,36%,21%)] disabled:opacity-30 disabled:hover:border-gray-300 disabled:hover:text-gray-400"
         >
           <ChevronRight className="size-5" />
         </button>
       </div>
-      <Button className="gap-2 bg-[#2e234a] px-6 text-sm tracking-wide text-white hover:bg-[#3d2f5e]">
+      <Button className="gap-2 bg-[hsl(257,36%,21%)] px-6 text-sm tracking-wide text-white hover:bg-[hsl(257,36%,28%)]">
         Ver todos
         <ArrowRight className="size-4" />
       </Button>
@@ -67,6 +72,13 @@ type TabType = "venda" | "aluguel" | "comercial"
 export function PropertyCatalog() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeTab, setActiveTab] = useState<TabType>("venda")
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 50)
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
 
   const filteredProperties = properties.filter((p) => {
     if (activeTab === "venda") return p.purpose === "venda"
@@ -85,6 +97,49 @@ export function PropertyCatalog() {
     { number: "120+", label: "Cidades atendidas" },
     { number: "98%", label: "Clientes satisfeitos" },
     { number: "15+", label: "Anos de experiência" },
+  ]
+
+  const howItWorks = [
+    {
+      icon: Search,
+      title: "Busque",
+      description: "Use os filtros para encontrar imóveis por localização, tipo e faixa de preço.",
+    },
+    {
+      icon: Eye,
+      title: "Conheça",
+      description: "Agende visitas presenciais e avalie cada detalhe do imóvel dos seus sonhos.",
+    },
+    {
+      icon: Key,
+      title: "Receba",
+      description: "Finalize a compra ou aluguel com segurança e agilidade conosco.",
+    },
+  ]
+
+  const cities = [
+    { name: "São Paulo", count: "1.200+" },
+    { name: "Rio de Janeiro", count: "890+" },
+    { name: "Belo Horizonte", count: "650+" },
+    { name: "Curitiba", count: "480+" },
+  ]
+
+  const testimonials = [
+    {
+      name: "Ana Silva",
+      initials: "AS",
+      text: "Encontrei meu apartamento ideal em menos de uma semana. O processo foi incrivelmente simples e o atendimento foi excepcional.",
+    },
+    {
+      name: "Carlos Oliveira",
+      initials: "CO",
+      text: "Excelente profissionalismo. Me ajudaram desde a busca até a assinatura do contrato. Recomendo demais!",
+    },
+    {
+      name: "Maria Santos",
+      initials: "MS",
+      text: "O processo de financiamento foi tranquilo e rápido. Hoje eu já moro no meu novo lar. Muito obrigada!",
+    },
   ]
 
   const faqs = [
@@ -123,10 +178,16 @@ export function PropertyCatalog() {
   return (
     <div className="flex min-h-screen flex-col">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-gradient-to-br from-[#2e234a] to-[#1a1432]">
+      <header
+        className={`sticky top-0 z-50 transition-colors duration-300 ${
+          scrolled
+            ? "bg-[hsl(257,36%,21%)]"
+            : "bg-transparent"
+        }`}
+      >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
           <div className="flex items-center gap-3">
-            <div className="flex size-9 items-center justify-center rounded-lg bg-white text-sm font-bold text-[#2e234a]">
+            <div className="flex size-9 items-center justify-center rounded-lg bg-white text-sm font-bold text-[hsl(257,36%,21%)]">
               IC
             </div>
             <span className="text-lg font-semibold tracking-tight text-white">
@@ -156,11 +217,11 @@ export function PropertyCatalog() {
           <div className="flex items-center gap-2">
             <Button
               variant="outline"
-              className="hidden border-white/40 font-semibold text-white hover:bg-white hover:text-[#2e234a] sm:inline-flex"
+              className="hidden border-white/40 font-semibold text-white hover:bg-white hover:text-[hsl(257,36%,21%)] sm:inline-flex"
             >
               Entrar
             </Button>
-            <Button className="hidden bg-white text-[#2e234a] hover:bg-white/90 sm:inline-flex">
+            <Button className="hidden bg-white text-[hsl(257,36%,21%)] hover:bg-white/90 sm:inline-flex">
               Cadastrar
             </Button>
             <Button
@@ -175,7 +236,7 @@ export function PropertyCatalog() {
         </div>
 
         {mobileMenuOpen && (
-          <div className="border-t border-white/10 bg-[#2e234a] px-4 py-4 md:hidden">
+          <div className="border-t border-white/10 bg-[hsl(257,36%,21%)] px-4 py-4 md:hidden">
             <nav className="flex flex-col gap-1">
               <Button variant="ghost" className="justify-start gap-3 text-white hover:bg-white/10 hover:text-white">
                 <Building2 className="size-4" /> Comprar
@@ -190,17 +251,17 @@ export function PropertyCatalog() {
                 <Briefcase className="size-4" /> Comercial
               </Button>
               <hr className="my-2 border-white/20" />
-              <Button variant="outline" className="justify-start border-white/40 text-white hover:bg-white hover:text-[#2e234a]">
+              <Button variant="outline" className="justify-start border-white/40 text-white hover:bg-white hover:text-[hsl(257,36%,21%)]">
                 Entrar
               </Button>
-              <Button className="justify-start bg-white text-[#2e234a] hover:bg-white/90">Cadastrar</Button>
+              <Button className="justify-start bg-white text-[hsl(257,36%,21%)] hover:bg-white/90">Cadastrar</Button>
             </nav>
           </div>
         )}
       </header>
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#2e234a] to-[#1a1432] py-20 text-white md:py-28">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[hsl(257,36%,21%)] to-[hsl(257,36%,13%)] py-20 text-white md:py-28">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 right-0 size-96 rounded-full bg-white/20 blur-3xl" />
           <div className="absolute bottom-0 left-0 size-64 rounded-full bg-white/10 blur-3xl" />
@@ -217,7 +278,7 @@ export function PropertyCatalog() {
               localizações do Brasil.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Button className="bg-white px-8 py-6 text-sm font-semibold tracking-wide text-[#2e234a] hover:bg-white/90">
+              <Button className="bg-white px-8 py-6 text-sm font-semibold tracking-wide text-[hsl(257,36%,21%)] hover:bg-white/90">
                 Comprar
               </Button>
               <Button
@@ -231,14 +292,16 @@ export function PropertyCatalog() {
       </section>
 
       {/* Search Filters */}
-      <div className="mx-auto w-full max-w-7xl px-4">
-        <div className="-mt-10 relative z-10 mb-12">
-          <SearchFilters />
+      <div className="bg-[hsl(248,42%,97%)] pb-4">
+        <div className="mx-auto w-full max-w-7xl px-4">
+          <div className="-mt-10 relative z-10 mb-12">
+            <SearchFilters />
+          </div>
         </div>
       </div>
 
       {/* Property Carousel Section */}
-      <section className="bg-[#f3f2fa] py-16">
+      <section className="bg-[hsl(248,42%,97%)] py-16">
         <div className="mx-auto max-w-7xl px-4">
           <h2 className="mb-2 text-3xl font-light tracking-tight md:text-4xl">
             Nossos Imóveis
@@ -252,13 +315,13 @@ export function PropertyCatalog() {
                 onClick={() => setActiveTab(tab.value)}
                 className={`relative pb-4 text-sm font-semibold tracking-wide uppercase transition-colors ${
                   activeTab === tab.value
-                    ? "text-[#2e234a]"
+                    ? "text-[hsl(257,36%,21%)]"
                     : "text-gray-400 hover:text-gray-600"
                 }`}
               >
                 {tab.label}
                 {activeTab === tab.value && (
-                  <span className="absolute bottom-0 left-0 h-0.5 w-full bg-[#2e234a]" />
+                  <span className="absolute bottom-0 left-0 h-0.5 w-full bg-[hsl(257,36%,21%)]" />
                 )}
               </button>
             ))}
@@ -280,13 +343,85 @@ export function PropertyCatalog() {
         </div>
       </section>
 
+      {/* Como Funciona Section */}
+      <section className="bg-[hsl(248,42%,97%)] py-20">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="mb-14 text-center">
+            <h2 className="mb-3 text-3xl font-light tracking-tight text-[hsl(257,36%,21%)] md:text-4xl">
+              Como funciona
+            </h2>
+            <p className="text-gray-500">
+              Três passos simples para encontrar o imóvel perfeito
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            {howItWorks.map((step, i) => (
+              <div
+                key={i}
+                className="rounded-xl border border-gray-200 bg-white p-8 text-center transition-shadow hover:shadow-lg"
+              >
+                <div className="mb-5 flex justify-center">
+                  <div className="flex size-14 items-center justify-center rounded-full bg-[hsl(257,36%,21%)]/10">
+                    <step.icon className="size-7 text-[hsl(257,36%,21%)]" />
+                  </div>
+                </div>
+                <div className="mb-2 text-xs font-semibold tracking-widest text-gray-400 uppercase">
+                  Passo {i + 1}
+                </div>
+                <h3 className="mb-3 text-xl font-semibold text-[hsl(257,36%,21%)]">
+                  {step.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-gray-500">
+                  {step.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Cidades Populares Section */}
+      <section className="bg-[hsl(257,36%,21%)] py-20">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="mb-14 text-center">
+            <h2 className="mb-3 text-3xl font-light tracking-tight text-white md:text-4xl">
+              Cidades populares
+            </h2>
+            <p className="text-white/60">
+              Explore os melhores imóveis nas principais cidades do Brasil
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {cities.map((city, i) => (
+              <div
+                key={i}
+                className="group relative flex h-56 cursor-pointer items-end overflow-hidden rounded-2xl transition-transform duration-300 hover:scale-[1.02]"
+                style={{
+                  background: `linear-gradient(135deg, hsl(257,36%,28%) 0%, hsl(257,36%,13%) 100%)`,
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                <div className="relative z-10 w-full p-6">
+                  <h3 className="text-xl font-semibold text-white">
+                    {city.name}
+                  </h3>
+                  <p className="text-sm text-white/70">{city.count} imóveis</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Stats Section */}
-      <section className="bg-[#f3f2fa] py-20">
+      <section className="bg-[hsl(248,42%,97%)] py-20">
         <div className="mx-auto max-w-7xl px-4">
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             {stats.map((stat, i) => (
               <div key={i} className="text-center">
-                <p className="mb-2 text-4xl font-light tracking-tight text-[#2e234a] md:text-5xl">
+                <p className="mb-2 text-4xl font-light tracking-tight text-[hsl(257,36%,21%)] md:text-5xl">
                   {stat.number}
                 </p>
                 <p className="text-sm text-gray-500">{stat.label}</p>
@@ -296,8 +431,86 @@ export function PropertyCatalog() {
         </div>
       </section>
 
+      {/* Depoimentos Section */}
+      <section className="bg-[hsl(248,42%,97%)] py-20">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="mb-14 text-center">
+            <h2 className="mb-3 text-3xl font-light tracking-tight text-[hsl(257,36%,21%)] md:text-4xl">
+              O que dizem nossos clientes
+            </h2>
+            <p className="text-gray-500">
+              Histórias reais de quem já encontrou o imóvel dos sonhos
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {testimonials.map((t, i) => (
+              <div
+                key={i}
+                className="rounded-xl border border-gray-200 bg-white p-8 transition-shadow hover:shadow-lg"
+              >
+                <Quote className="mb-4 size-8 text-[hsl(257,36%,21%)]/20" />
+                <p className="mb-6 text-sm leading-relaxed text-gray-600">
+                  &ldquo;{t.text}&rdquo;
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="flex size-10 items-center justify-center rounded-full bg-[hsl(257,36%,21%)] text-sm font-bold text-white">
+                    {t.initials}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-[hsl(257,36%,21%)]">
+                      {t.name}
+                    </p>
+                    <div className="flex gap-0.5">
+                      {Array.from({ length: 5 }).map((_, s) => (
+                        <Star
+                          key={s}
+                          className="size-3.5 fill-amber-400 text-amber-400"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="bg-[hsl(248,42%,97%)] py-20">
+        <div className="mx-auto max-w-3xl px-4">
+          <div className="mb-12 text-center">
+            <div className="mb-4 flex justify-center">
+              <div className="flex size-12 items-center justify-center rounded-full bg-[hsl(257,36%,21%)]/10">
+                <HelpCircle className="size-6 text-[hsl(257,36%,21%)]" />
+              </div>
+            </div>
+            <h2 className="mb-3 text-3xl font-light tracking-tight text-[hsl(257,36%,21%)] md:text-4xl">
+              Perguntas frequentes
+            </h2>
+            <p className="text-gray-500">
+              Tire suas dúvidas sobre compra, aluguel e serviços
+            </p>
+          </div>
+
+          <Accordion>
+            {faqs.map((faq, i) => (
+              <AccordionItem key={i} value={`faq-${i}`}>
+                <AccordionTrigger className="text-[hsl(257,36%,21%)]">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-gray-500">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
       {/* CTA Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#2e234a] to-[#1a1432] py-20 text-white">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[hsl(257,36%,21%)] to-[hsl(257,36%,13%)] py-20 text-white">
         <div className="absolute top-0 right-0 h-full w-1/2 opacity-10">
           <div className="absolute top-1/4 right-1/4 size-80 rotate-45 border border-white/30" />
           <div className="absolute top-1/3 right-1/3 size-60 rotate-12 border border-white/20" />
@@ -310,7 +523,7 @@ export function PropertyCatalog() {
             Fale com um dos nossos especialistas e encontre o imóvel perfeito.
           </p>
           <Button
-            className="bg-white px-10 py-6 text-sm font-semibold tracking-wide text-[#2e234a] hover:bg-white/90"
+            className="bg-white px-10 py-6 text-sm font-semibold tracking-wide text-[hsl(257,36%,21%)] hover:bg-white/90"
           >
             Fale conosco
             <ArrowRight className="size-4" />
@@ -318,46 +531,14 @@ export function PropertyCatalog() {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="bg-[#f3f2fa] py-20">
-        <div className="mx-auto max-w-3xl px-4">
-          <div className="mb-12 text-center">
-            <div className="mb-4 flex justify-center">
-              <div className="flex size-12 items-center justify-center rounded-full bg-[#2e234a]/10">
-                <HelpCircle className="size-6 text-[#2e234a]" />
-              </div>
-            </div>
-            <h2 className="mb-3 text-3xl font-light tracking-tight text-[#2e234a] md:text-4xl">
-              Perguntas frequentes
-            </h2>
-            <p className="text-gray-500">
-              Tire suas dúvidas sobre compra, aluguel e serviços
-            </p>
-          </div>
-
-          <Accordion>
-            {faqs.map((faq, i) => (
-              <AccordionItem key={i} value={`faq-${i}`}>
-                <AccordionTrigger className="text-[#2e234a]">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-gray-500">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
-      </section>
-
       {/* Footer */}
-      <footer className="bg-[#f3f2fa] py-16">
+      <footer className="bg-[hsl(248,42%,97%)] py-16">
         <div className="mx-auto max-w-7xl px-4">
           <div className="mb-12 flex items-center gap-3">
-            <div className="flex size-10 items-center justify-center rounded-lg bg-[#2e234a] text-sm font-bold text-white">
+            <div className="flex size-10 items-center justify-center rounded-lg bg-[hsl(257,36%,21%)] text-sm font-bold text-white">
               IC
             </div>
-            <span className="text-xl font-semibold tracking-tight text-[#2e234a]">
+            <span className="text-xl font-semibold tracking-tight text-[hsl(257,36%,21%)]">
               ImóveisCatálogo
             </span>
           </div>
@@ -371,31 +552,31 @@ export function PropertyCatalog() {
             </div>
 
             <div>
-              <h3 className="mb-4 text-xs font-semibold tracking-widest uppercase text-[#2e234a]">
+              <h3 className="mb-4 text-xs font-semibold tracking-widest uppercase text-[hsl(257,36%,21%)]">
                 Comprar
               </h3>
               <ul className="space-y-3 text-sm text-gray-500">
-                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Apartamentos</a></li>
-                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Casas</a></li>
-                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Terrenos</a></li>
-                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Comerciais</a></li>
+                <li><a href="#" className="transition-colors hover:text-[hsl(257,36%,21%)]">Apartamentos</a></li>
+                <li><a href="#" className="transition-colors hover:text-[hsl(257,36%,21%)]">Casas</a></li>
+                <li><a href="#" className="transition-colors hover:text-[hsl(257,36%,21%)]">Terrenos</a></li>
+                <li><a href="#" className="transition-colors hover:text-[hsl(257,36%,21%)]">Comerciais</a></li>
               </ul>
             </div>
 
             <div>
-              <h3 className="mb-4 text-xs font-semibold tracking-widest uppercase text-[#2e234a]">
+              <h3 className="mb-4 text-xs font-semibold tracking-widest uppercase text-[hsl(257,36%,21%)]">
                 Alugar
               </h3>
               <ul className="space-y-3 text-sm text-gray-500">
-                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Apartamentos</a></li>
-                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Casas</a></li>
-                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Salas Comerciais</a></li>
-                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Lofts</a></li>
+                <li><a href="#" className="transition-colors hover:text-[hsl(257,36%,21%)]">Apartamentos</a></li>
+                <li><a href="#" className="transition-colors hover:text-[hsl(257,36%,21%)]">Casas</a></li>
+                <li><a href="#" className="transition-colors hover:text-[hsl(257,36%,21%)]">Salas Comerciais</a></li>
+                <li><a href="#" className="transition-colors hover:text-[hsl(257,36%,21%)]">Lofts</a></li>
               </ul>
             </div>
 
             <div>
-              <h3 className="mb-4 text-xs font-semibold tracking-widest uppercase text-[#2e234a]">
+              <h3 className="mb-4 text-xs font-semibold tracking-widest uppercase text-[hsl(257,36%,21%)]">
                 Contato
               </h3>
               <ul className="space-y-3 text-sm text-gray-500">
@@ -417,8 +598,8 @@ export function PropertyCatalog() {
           <div className="flex flex-col items-center justify-between gap-4 text-xs text-gray-400 sm:flex-row">
             <p>&copy; 2026 ImóveisCatálogo. Todos os direitos reservados.</p>
             <div className="flex gap-6">
-              <a href="#" className="transition-colors hover:text-[#2e234a]">Termos de uso</a>
-              <a href="#" className="transition-colors hover:text-[#2e234a]">Privacidade</a>
+              <a href="#" className="transition-colors hover:text-[hsl(257,36%,21%)]">Termos de uso</a>
+              <a href="#" className="transition-colors hover:text-[hsl(257,36%,21%)]">Privacidade</a>
             </div>
           </div>
         </div>

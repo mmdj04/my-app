@@ -14,8 +14,8 @@ interface PropertyCardProps {
 }
 
 const tagStyles: Record<string, string> = {
-  destaque: "bg-[#2e234a] text-white",
-  novo: "bg-[#2e234a] text-white",
+  destaque: "bg-[hsl(257,36%,21%)] text-white",
+  novo: "bg-[hsl(257,36%,21%)] text-white",
 }
 
 export function PropertyCard({ property, className }: PropertyCardProps) {
@@ -51,7 +51,7 @@ export function PropertyCard({ property, className }: PropertyCardProps) {
           </span>
         </div>
 
-        <p className="mt-1 text-2xl font-semibold tracking-tight text-[#2e234a]">
+        <p className="mt-1 text-2xl font-semibold tracking-tight text-[hsl(257,36%,21%)]">
           {formatPrice(property.price, property.purpose)}
         </p>
 
@@ -107,7 +107,7 @@ export function PropertyCard({ property, className }: PropertyCardProps) {
             />
           </Button>
         </div>
-        <ChevronRight className="size-5 shrink-0 text-gray-300 transition-colors group-hover:text-[#2e234a]" />
+        <ChevronRight className="size-5 shrink-0 text-gray-300 transition-colors group-hover:text-[hsl(257,36%,21%)]" />
       </div>
     </div>
   )
