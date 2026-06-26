@@ -62,17 +62,8 @@ export function PropertyCatalog() {
   return (
     <div className="flex min-h-screen flex-col">
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b bg-white shadow-sm">
+      <header className="sticky top-0 z-50 border-b bg-[#ededed] shadow-sm">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
-          <div className="flex items-center gap-2">
-            <div className="flex size-8 items-center justify-center rounded-lg bg-emerald-600 text-sm font-bold text-white">
-              IC
-            </div>
-            <span className="text-xl font-bold text-emerald-600">
-              ImóveisCatálogo
-            </span>
-          </div>
-
           <nav className="hidden items-center gap-1 md:flex">
             <Button variant="ghost" className="gap-2">
               <Building2 className="size-4" />
@@ -113,7 +104,7 @@ export function PropertyCatalog() {
         </div>
 
         {mobileMenuOpen && (
-          <div className="border-t bg-white px-4 py-3 md:hidden">
+          <div className="border-t bg-[#ededed] px-4 py-3 md:hidden">
             <nav className="flex flex-col gap-1">
               <Button variant="ghost" className="justify-start gap-2">
                 <Building2 className="size-4" />
@@ -142,19 +133,19 @@ export function PropertyCatalog() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-emerald-700 to-emerald-900 py-12 text-white md:py-16">
+      <section className="relative bg-gradient-to-br from-[#2e234a] to-[#1a1432] py-12 text-white md:py-16">
         <div className="mx-auto max-w-7xl px-4 text-center">
           <h1 className="mb-3 text-3xl font-bold md:text-4xl">
             Encontre o imóvel dos seus sonhos
           </h1>
-          <p className="mb-8 text-lg text-emerald-100">
+          <p className="mb-8 text-lg text-white/80">
             Milhares de opções de apartamentos, casas e terrenos em todo o
             Brasil
           </p>
           <div className="mx-auto max-w-3xl">
             <div className="flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 backdrop-blur-sm">
-              <MapPin className="size-5 text-emerald-200" />
-              <span className="text-sm text-emerald-100">
+              <MapPin className="size-5 text-white/70" />
+              <span className="text-sm text-white/80">
                 São Paulo, Rio de Janeiro, Belo Horizonte e mais...
               </span>
             </div>
@@ -252,14 +243,6 @@ export function PropertyCatalog() {
         <div className="mx-auto max-w-7xl px-4 py-10">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
             <div>
-              <div className="mb-3 flex items-center gap-2">
-                <div className="flex size-8 items-center justify-center rounded-lg bg-emerald-600 text-sm font-bold text-white">
-                  IC
-                </div>
-                <span className="text-lg font-bold text-emerald-600">
-                  ImóveisCatálogo
-                </span>
-              </div>
               <p className="text-sm text-muted-foreground">
                 O melhor portal de imóveis do Brasil. Encontre sua casa dos
                 sonhos.

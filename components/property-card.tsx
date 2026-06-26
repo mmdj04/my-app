@@ -16,7 +16,7 @@ interface PropertyCardProps {
 
 const tagStyles: Record<string, string> = {
   destaque: "bg-yellow-500 text-white hover:bg-yellow-600",
-  novo: "bg-emerald-500 text-white hover:bg-emerald-600",
+  novo: "bg-[#2e234a] text-white hover:bg-[#3d2f5e]",
   reformado: "bg-blue-500 text-white hover:bg-blue-600",
 }
 
@@ -109,7 +109,7 @@ export function PropertyCard({ property, className }: PropertyCardProps) {
           </h3>
         </div>
 
-        <p className="text-xl font-bold text-emerald-600">
+        <p className="text-xl font-bold text-[#2e234a]">
           {formatPrice(property.price, property.purpose)}
         </p>
 
@@ -155,7 +155,7 @@ export function PropertyCard({ property, className }: PropertyCardProps) {
         </div>
       </CardContent>
 
-      <CardFooter className="flex items-center justify-between border-t bg-muted/30 pt-3">
+      <CardFooter className="flex items-center justify-between border-t bg-[#ededed] pt-3">
         <div className="flex items-center gap-2">
           <div className="flex size-8 items-center justify-center rounded-full bg-primary/10 text-xs font-medium text-primary">
             {property.broker.name.charAt(0)}

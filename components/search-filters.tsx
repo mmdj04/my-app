@@ -35,7 +35,7 @@ export function SearchFilters({ onSearch }: SearchFiltersProps) {
   }
 
   return (
-    <div className="w-full rounded-xl bg-white p-4 shadow-lg ring-1 ring-black/5 md:p-6">
+    <div className="w-full rounded-xl bg-[#ededed] p-4 shadow-lg ring-1 ring-black/5 md:p-6">
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-6">
         <div className="lg:col-span-2">
           <label className="mb-1 block text-xs font-medium text-muted-foreground">
