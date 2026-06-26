@@ -187,8 +187,8 @@ export function PropertyCatalog() {
                 </CarouselItem>
               ))}
             </CarouselContent>
+            <CarouselControls />
           </Carousel>
-          <CarouselControls />
         </section>
 
         {/* All Properties Carousel */}
@@ -208,8 +208,8 @@ export function PropertyCatalog() {
                 </CarouselItem>
               ))}
             </CarouselContent>
+            <CarouselControls />
           </Carousel>
-          <CarouselControls />
         </section>
       </main>
 
