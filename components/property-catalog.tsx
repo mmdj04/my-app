@@ -6,15 +6,11 @@ import {
   Building2,
   LandPlot,
   Briefcase,
-  MapPin,
   Menu,
   X,
   ChevronLeft,
   ChevronRight,
   ArrowRight,
-  Phone,
-  Mail,
-  MapPinned,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { PropertyCard } from "@/components/property-card"
@@ -25,7 +21,7 @@ import {
   CarouselItem,
   useCarousel,
 } from "@/components/ui/carousel"
-import { properties, type Property } from "@/data/properties"
+import { properties } from "@/data/properties"
 
 function CarouselControls() {
   const { scrollPrev, scrollNext, canScrollPrev, canScrollNext } = useCarousel()
@@ -83,17 +79,8 @@ export function PropertyCatalog() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      {/* Top Bar */}
-      <div className="bg-[#1a1432] py-2 text-[11px] tracking-widest text-white/60">
-        <div className="mx-auto flex max-w-7xl items-center justify-end gap-6 px-4">
-          <a href="#" className="transition-colors hover:text-white">Contato</a>
-          <a href="#" className="transition-colors hover:text-white">Sobre</a>
-          <a href="#" className="transition-colors hover:text-white">Anunciar</a>
-        </div>
-      </div>
-
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-[#2e234a]">
+      <header className="sticky top-0 z-50 bg-gradient-to-br from-[#2e234a] to-[#1a1432]">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
           <div className="flex items-center gap-3">
             <div className="flex size-9 items-center justify-center rounded-lg bg-white text-sm font-bold text-[#2e234a]">
@@ -126,7 +113,7 @@ export function PropertyCatalog() {
           <div className="flex items-center gap-2">
             <Button
               variant="outline"
-              className="hidden border-white/40 text-white hover:bg-white hover:text-[#2e234a] sm:inline-flex"
+              className="hidden border-white/40 font-semibold text-white hover:bg-white hover:text-[#2e234a] sm:inline-flex"
             >
               Entrar
             </Button>
@@ -191,8 +178,7 @@ export function PropertyCatalog() {
                 Comprar
               </Button>
               <Button
-                variant="outline"
-                className="border-white/40 px-8 py-6 text-sm font-semibold tracking-wide text-white hover:bg-white/10 hover:text-white"
+                className="border-white/20 bg-white/10 px-8 py-6 text-sm font-semibold tracking-wide text-white hover:bg-white/20"
               >
                 Alugar
               </Button>
@@ -281,8 +267,7 @@ export function PropertyCatalog() {
             Fale com um dos nossos especialistas e encontre o imóvel perfeito.
           </p>
           <Button
-            variant="outline"
-            className="border-white px-10 py-6 text-sm font-semibold tracking-wide text-white hover:bg-white hover:text-[#2e234a]"
+            className="bg-white px-10 py-6 text-sm font-semibold tracking-wide text-[#2e234a] hover:bg-white/90"
           >
             Fale conosco
             <ArrowRight className="size-4" />
@@ -291,74 +276,86 @@ export function PropertyCatalog() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#f7f7f7] py-16">
+      <footer className="bg-[#f7f7f7] pb-8 pt-16">
         <div className="mx-auto max-w-7xl px-4">
-          <div className="mb-12 flex items-center gap-3">
-            <div className="flex size-10 items-center justify-center rounded-lg bg-[#2e234a] text-sm font-bold text-white">
-              IC
-            </div>
-            <span className="text-xl font-semibold tracking-tight text-[#2e234a]">
-              ImóveisCatálogo
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
-            <div className="max-w-xs">
-              <p className="text-sm leading-relaxed text-gray-500">
-                O melhor portal de imóveis do Brasil. Encontre sua casa dos
-                sonhos com segurança e facilidade.
-              </p>
+          <div className="rounded-2xl bg-[#1a1432] p-10 md:p-14">
+            {/* Footer top */}
+            <div className="mb-12 flex items-center gap-3">
+              <div className="flex size-10 items-center justify-center rounded-lg bg-white text-sm font-bold text-[#2e234a]">
+                IC
+              </div>
+              <span className="text-xl font-semibold tracking-tight text-white">
+                ImóveisCatálogo
+              </span>
             </div>
 
-            <div>
-              <h3 className="mb-4 text-xs font-semibold tracking-widest uppercase text-[#2e234a]">
-                Comprar
-              </h3>
-              <ul className="space-y-3 text-sm text-gray-500">
-                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Apartamentos</a></li>
-                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Casas</a></li>
-                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Terrenos</a></li>
-                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Comerciais</a></li>
-              </ul>
+            {/* Footer columns */}
+            <div className="grid grid-cols-2 gap-10 md:grid-cols-5">
+              <div>
+                <h3 className="mb-5 text-[11px] font-semibold tracking-widest uppercase text-white/40">
+                  Imóveis
+                </h3>
+                <ul className="space-y-3 text-sm text-white/70">
+                  <li><a href="#" className="transition-colors hover:text-white">Apartamentos</a></li>
+                  <li><a href="#" className="transition-colors hover:text-white">Casas</a></li>
+                  <li><a href="#" className="transition-colors hover:text-white">Terrenos</a></li>
+                  <li><a href="#" className="transition-colors hover:text-white">Comerciais</a></li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="mb-5 text-[11px] font-semibold tracking-widest uppercase text-white/40">
+                  Serviços
+                </h3>
+                <ul className="space-y-3 text-sm text-white/70">
+                  <li><a href="#" className="transition-colors hover:text-white">Financiamento</a></li>
+                  <li><a href="#" className="transition-colors hover:text-white">Seguros</a></li>
+                  <li><a href="#" className="transition-colors hover:text-white">Avaliação</a></li>
+                  <li><a href="#" className="transition-colors hover:text-white">Reforma</a></li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="mb-5 text-[11px] font-semibold tracking-widest uppercase text-white/40">
+                  Empresa
+                </h3>
+                <ul className="space-y-3 text-sm text-white/70">
+                  <li><a href="#" className="transition-colors hover:text-white">Sobre nós</a></li>
+                  <li><a href="#" className="transition-colors hover:text-white">Carreiras</a></li>
+                  <li><a href="#" className="transition-colors hover:text-white">Imprensa</a></li>
+                  <li><a href="#" className="transition-colors hover:text-white">Contato</a></li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="mb-5 text-[11px] font-semibold tracking-widest uppercase text-white/40">
+                  Legal
+                </h3>
+                <ul className="space-y-3 text-sm text-white/70">
+                  <li><a href="#" className="transition-colors hover:text-white">Privacidade</a></li>
+                  <li><a href="#" className="transition-colors hover:text-white">Termos</a></li>
+                  <li><a href="#" className="transition-colors hover:text-white">Cookies</a></li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="mb-5 text-[11px] font-semibold tracking-widest uppercase text-white/40">
+                  Redes
+                </h3>
+                <ul className="space-y-3 text-sm text-white/70">
+                  <li><a href="#" className="transition-colors hover:text-white">Instagram</a></li>
+                  <li><a href="#" className="transition-colors hover:text-white">LinkedIn</a></li>
+                  <li><a href="#" className="transition-colors hover:text-white">YouTube</a></li>
+                </ul>
+              </div>
             </div>
 
-            <div>
-              <h3 className="mb-4 text-xs font-semibold tracking-widest uppercase text-[#2e234a]">
-                Alugar
-              </h3>
-              <ul className="space-y-3 text-sm text-gray-500">
-                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Apartamentos</a></li>
-                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Casas</a></li>
-                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Salas Comerciais</a></li>
-                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Lofts</a></li>
-              </ul>
-            </div>
+            {/* Separator */}
+            <hr className="my-10 border-white/10" />
 
-            <div>
-              <h3 className="mb-4 text-xs font-semibold tracking-widest uppercase text-[#2e234a]">
-                Contato
-              </h3>
-              <ul className="space-y-3 text-sm text-gray-500">
-                <li className="flex items-center gap-2">
-                  <Phone className="size-3.5" /> (11) 99999-0000
-                </li>
-                <li className="flex items-center gap-2">
-                  <Mail className="size-3.5" /> contato@imovelcatalogo.com
-                </li>
-                <li className="flex items-center gap-2">
-                  <MapPinned className="size-3.5" /> São Paulo, SP
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <hr className="my-10 border-gray-200" />
-
-          <div className="flex flex-col items-center justify-between gap-4 text-xs text-gray-400 sm:flex-row">
-            <p>&copy; 2026 ImóveisCatálogo. Todos os direitos reservados.</p>
-            <div className="flex gap-6">
-              <a href="#" className="transition-colors hover:text-[#2e234a]">Termos de uso</a>
-              <a href="#" className="transition-colors hover:text-[#2e234a]">Privacidade</a>
+            {/* Copyright */}
+            <div className="text-xs text-white/30">
+              © 2026 ImóveisCatálogo. Todos os direitos reservados.
             </div>
           </div>
         </div>
