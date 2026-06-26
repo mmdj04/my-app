@@ -1,14 +1,9 @@
-import { ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { FundCarousel } from "@/components/fund-carousel"
+import { FundCard, type Fund } from "@/components/fund-card"
 
-const funds = {
+const funds: Record<string, Fund[]> = {
   etfs: [
     { ticker: "BTC", name: "Grayscale Bitcoin Mini Trust ETF", price: "$26.18" },
     { ticker: "ETH", name: "Grayscale Ethereum Staking Mini ETF", price: "$14.80" },
@@ -28,38 +23,26 @@ const funds = {
   ],
 }
 
-function FundCard({ ticker, name, price }: { ticker: string; name: string; price: string }) {
+function FundGrid({ items }: { items: Fund[] }) {
   return (
-    <Card className="group cursor-pointer border-border/50 bg-white transition-shadow hover:shadow-md">
-      <CardHeader className="pb-2">
-        <CardTitle className="text-4xl font-bold tracking-tight">{ticker}</CardTitle>
-      </CardHeader>
-      <CardContent className="flex min-h-[160px] flex-col justify-between">
-        <p className="text-sm text-muted-foreground">{name}</p>
-        <div className="flex items-end justify-between">
-          <div>
-            <p className="text-2xl font-semibold">{price}</p>
-            <p className="text-xs text-muted-foreground">
-              Market Price as of 06/25/2026
-            </p>
-          </div>
-          <ChevronRight className="size-5 text-muted-foreground transition-transform group-hover:translate-x-1" />
-        </div>
-      </CardContent>
-    </Card>
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+      {items.map((fund) => (
+        <FundCard key={fund.ticker} {...fund} />
+      ))}
+    </div>
   )
 }
 
 export default function Page() {
   return (
     <>
-      <section className="relative flex min-h-[85vh] items-center px-6 py-24">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-transparent via-transparent to-violet-100/50" />
+      <section className="relative flex min-h-[60vh] items-center bg-[oklch(0.205_0_0)] px-6 py-16 text-white">
+        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-transparent via-transparent to-violet-900/30" />
         <div className="max-w-3xl">
           <h1 className="text-5xl font-bold leading-tight tracking-tight sm:text-7xl">
             Digital Asset Investing Fundamentals Course
           </h1>
-          <p className="mt-6 max-w-xl text-lg text-muted-foreground">
+          <p className="mt-6 max-w-xl text-lg text-white/70">
             Master the foundations of investing in crypto assets with
             Grayscale&apos;s five-class, CE-credit course.
           </p>
@@ -67,7 +50,7 @@ export default function Page() {
             <Button size="lg" className="uppercase tracking-wider">
               Class 2: Register Now
             </Button>
-            <Button size="lg" variant="outline" className="uppercase tracking-wider">
+            <Button size="lg" variant="outline" className="uppercase tracking-wider border-white/30 text-white hover:bg-white/10">
               See Syllabus
             </Button>
           </div>
@@ -93,26 +76,29 @@ export default function Page() {
           </TabsList>
 
           <TabsContent value="etfs">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {funds.etfs.map((fund) => (
-                <FundCard key={fund.ticker} {...fund} />
-              ))}
+            <div className="lg:hidden">
+              <FundCarousel funds={funds.etfs} />
+            </div>
+            <div className="hidden lg:block">
+              <FundGrid items={funds.etfs} />
             </div>
           </TabsContent>
 
           <TabsContent value="publiclyTraded">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {funds.publiclyTraded.map((fund) => (
-                <FundCard key={fund.ticker} {...fund} />
-              ))}
+            <div className="lg:hidden">
+              <FundCarousel funds={funds.publiclyTraded} />
+            </div>
+            <div className="hidden lg:block">
+              <FundGrid items={funds.publiclyTraded} />
             </div>
           </TabsContent>
 
           <TabsContent value="privateFunds">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {funds.privateFunds.map((fund) => (
-                <FundCard key={fund.ticker} {...fund} />
-              ))}
+            <div className="lg:hidden">
+              <FundCarousel funds={funds.privateFunds} />
+            </div>
+            <div className="hidden lg:block">
+              <FundGrid items={funds.privateFunds} />
             </div>
           </TabsContent>
         </Tabs>
