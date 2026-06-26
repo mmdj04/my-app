@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import {
   Home,
   Building2,
@@ -72,13 +72,6 @@ type TabType = "venda" | "aluguel" | "comercial"
 export function PropertyCatalog() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeTab, setActiveTab] = useState<TabType>("venda")
-  const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50)
-    window.addEventListener("scroll", onScroll, { passive: true })
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [])
 
   const filteredProperties = properties.filter((p) => {
     if (activeTab === "venda") return p.purpose === "venda"
@@ -178,13 +171,7 @@ export function PropertyCatalog() {
   return (
     <div className="flex min-h-screen flex-col">
       {/* Header */}
-      <header
-        className={`sticky top-0 z-50 transition-colors duration-300 ${
-          scrolled
-            ? "bg-[hsl(257,36%,21%)]"
-            : "bg-transparent"
-        }`}
-      >
+      <header className="sticky top-0 z-50 bg-gradient-to-br from-[hsl(257,36%,21%)] to-[hsl(257,36%,13%)]">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
           <div className="flex items-center gap-3">
             <div className="flex size-9 items-center justify-center rounded-lg bg-white text-sm font-bold text-[hsl(257,36%,21%)]">
