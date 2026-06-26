@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState } from "react"
 import {
   Home,
   Building2,
@@ -13,85 +13,51 @@ import {
 import { Button } from "@/components/ui/button"
 import { PropertyCard } from "@/components/property-card"
 import { SearchFilters } from "@/components/search-filters"
-import { ResultsHeader } from "@/components/results-header"
 import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination"
-import { properties, type Property } from "@/data/properties"
-
-function sortProperties(items: Property[], sortBy: string): Property[] {
-  const sorted = [...items]
-  switch (sortBy) {
-    case "price-asc":
-      return sorted.sort((a, b) => a.price - b.price)
-    case "price-desc":
-      return sorted.sort((a, b) => b.price - a.price)
-    case "area-asc":
-      return sorted.sort((a, b) => a.area - b.area)
-    case "area-desc":
-      return sorted.sort((a, b) => b.area - a.area)
-    case "recent":
-    default:
-      return sorted
-  }
-}
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+import { properties } from "@/data/properties"
 
 export function PropertyCatalog() {
-  const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
-  const [sortBy, setSortBy] = useState("recent")
-  const [currentPage, setCurrentPage] = useState(1)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const itemsPerPage = 6
-
-  const sortedProperties = useMemo(
-    () => sortProperties(properties, sortBy),
-    [sortBy]
-  )
-
-  const totalPages = Math.ceil(sortedProperties.length / itemsPerPage)
-  const paginatedProperties = sortedProperties.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  )
 
   return (
     <div className="flex min-h-screen flex-col">
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b bg-[#ededed] shadow-sm">
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#2e234a] shadow-sm">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
           <nav className="hidden items-center gap-1 md:flex">
-            <Button variant="ghost" className="gap-2">
+            <Button variant="ghost" className="gap-2 text-white hover:bg-white/10 hover:text-white">
               <Building2 className="size-4" />
               Comprar
             </Button>
-            <Button variant="ghost" className="gap-2">
+            <Button variant="ghost" className="gap-2 text-white hover:bg-white/10 hover:text-white">
               <Home className="size-4" />
               Alugar
             </Button>
-            <Button variant="ghost" className="gap-2">
+            <Button variant="ghost" className="gap-2 text-white hover:bg-white/10 hover:text-white">
               <LandPlot className="size-4" />
               Terrenos
             </Button>
-            <Button variant="ghost" className="gap-2">
+            <Button variant="ghost" className="gap-2 text-white hover:bg-white/10 hover:text-white">
               <Briefcase className="size-4" />
               Comercial
             </Button>
           </nav>
 
           <div className="flex items-center gap-2">
-            <Button variant="outline" className="hidden sm:inline-flex">
+            <Button variant="outline" className="hidden border-white/30 text-white hover:bg-white/10 hover:text-white sm:inline-flex">
               Entrar
             </Button>
-            <Button className="hidden sm:inline-flex">Cadastrar</Button>
+            <Button className="hidden bg-white text-[#2e234a] hover:bg-white/90 sm:inline-flex">Cadastrar</Button>
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="text-white hover:bg-white/10 md:hidden"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? (
@@ -104,29 +70,29 @@ export function PropertyCatalog() {
         </div>
 
         {mobileMenuOpen && (
-          <div className="border-t bg-[#ededed] px-4 py-3 md:hidden">
+          <div className="border-t border-white/10 bg-[#2e234a] px-4 py-3 md:hidden">
             <nav className="flex flex-col gap-1">
-              <Button variant="ghost" className="justify-start gap-2">
+              <Button variant="ghost" className="justify-start gap-2 text-white hover:bg-white/10 hover:text-white">
                 <Building2 className="size-4" />
                 Comprar
               </Button>
-              <Button variant="ghost" className="justify-start gap-2">
+              <Button variant="ghost" className="justify-start gap-2 text-white hover:bg-white/10 hover:text-white">
                 <Home className="size-4" />
                 Alugar
               </Button>
-              <Button variant="ghost" className="justify-start gap-2">
+              <Button variant="ghost" className="justify-start gap-2 text-white hover:bg-white/10 hover:text-white">
                 <LandPlot className="size-4" />
                 Terrenos
               </Button>
-              <Button variant="ghost" className="justify-start gap-2">
+              <Button variant="ghost" className="justify-start gap-2 text-white hover:bg-white/10 hover:text-white">
                 <Briefcase className="size-4" />
                 Comercial
               </Button>
-              <hr className="my-2" />
-              <Button variant="outline" className="justify-start">
+              <hr className="my-2 border-white/20" />
+              <Button variant="outline" className="justify-start border-white/30 text-white hover:bg-white/10 hover:text-white">
                 Entrar
               </Button>
-              <Button className="justify-start">Cadastrar</Button>
+              <Button className="justify-start bg-white text-[#2e234a] hover:bg-white/90">Cadastrar</Button>
             </nav>
           </div>
         )}
@@ -159,87 +125,63 @@ export function PropertyCatalog() {
           <SearchFilters />
         </div>
 
-        <div className="space-y-6">
-          <ResultsHeader
-            totalResults={sortedProperties.length}
-            viewMode={viewMode}
-            onViewModeChange={setViewMode}
-            sortBy={sortBy}
-            onSortChange={setSortBy}
-          />
-
-          {/* Property Grid/List */}
-          <div
-            className={
-              viewMode === "grid"
-                ? "grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
-                : "flex flex-col gap-4"
-            }
-          >
-            {paginatedProperties.map((property) => (
-              <PropertyCard
-                key={property.id}
-                property={property}
-                className={viewMode === "list" ? "md:flex-row" : ""}
-              />
-            ))}
+        {/* Featured Carousel */}
+        <section className="mb-10">
+          <h2 className="mb-4 text-lg font-semibold">Destaques</h2>
+          <div className="relative">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-3">
+                {properties.map((property) => (
+                  <CarouselItem
+                    key={property.id}
+                    className="basis-[85vw] pl-3 sm:basis-[45vw] lg:basis-[30vw]"
+                  >
+                    <PropertyCard property={property} className="h-full" />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-0 size-9 -translate-x-1/2 border-0 bg-[#2e234a] text-white shadow-lg hover:bg-[#3d2f5e]" />
+              <CarouselNext className="right-0 size-9 translate-x-1/2 border-0 bg-[#2e234a] text-white shadow-lg hover:bg-[#3d2f5e]" />
+            </Carousel>
           </div>
+        </section>
 
-          {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="pt-4">
-              <Pagination>
-                <PaginationContent>
-                  <PaginationItem>
-                    <PaginationPrevious
-                      text="Anterior"
-                      onClick={() =>
-                        setCurrentPage((p) => Math.max(1, p - 1))
-                      }
-                      className={
-                        currentPage === 1
-                          ? "pointer-events-none opacity-50"
-                          : "cursor-pointer"
-                      }
-                    />
-                  </PaginationItem>
-
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                    (page) => (
-                      <PaginationItem key={page}>
-                        <PaginationLink
-                          isActive={page === currentPage}
-                          onClick={() => setCurrentPage(page)}
-                          className="cursor-pointer"
-                        >
-                          {page}
-                        </PaginationLink>
-                      </PaginationItem>
-                    )
-                  )}
-
-                  <PaginationItem>
-                    <PaginationNext
-                      text="Próximo"
-                      onClick={() =>
-                        setCurrentPage((p) => Math.min(totalPages, p + 1))
-                      }
-                      className={
-                        currentPage === totalPages
-                          ? "pointer-events-none opacity-50"
-                          : "cursor-pointer"
-                      }
-                    />
-                  </PaginationItem>
-                </PaginationContent>
-              </Pagination>
-            </div>
-          )}
-        </div>
+        {/* All Properties Carousel */}
+        <section>
+          <h2 className="mb-4 text-lg font-semibold">Todos os Imóveis</h2>
+          <div className="relative">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-3">
+                {[...properties].reverse().map((property) => (
+                  <CarouselItem
+                    key={property.id}
+                    className="basis-[85vw] pl-3 sm:basis-[45vw] lg:basis-[30vw]"
+                  >
+                    <PropertyCard property={property} className="h-full" />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-0 size-9 -translate-x-1/2 border-0 bg-[#2e234a] text-white shadow-lg hover:bg-[#3d2f5e]" />
+              <CarouselNext className="right-0 size-9 translate-x-1/2 border-0 bg-[#2e234a] text-white shadow-lg hover:bg-[#3d2f5e]" />
+            </Carousel>
+          </div>
+        </section>
       </main>
 
       {/* Footer */}
-      <footer className="border-t bg-gray-50">
+      <footer className="border-t bg-[#ededed]">
         <div className="mx-auto max-w-7xl px-4 py-10">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
             <div>
