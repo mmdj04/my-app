@@ -9,6 +9,9 @@ import {
   MapPin,
   Menu,
   X,
+  ChevronLeft,
+  ChevronRight,
+  ArrowRight,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { PropertyCard } from "@/components/property-card"
@@ -17,10 +20,38 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
+  useCarousel,
 } from "@/components/ui/carousel"
 import { properties } from "@/data/properties"
+
+function CarouselControls() {
+  const { scrollPrev, scrollNext, canScrollPrev, canScrollNext } = useCarousel()
+
+  return (
+    <div className="flex items-center justify-between pt-5">
+      <div className="flex gap-2">
+        <button
+          onClick={scrollPrev}
+          disabled={!canScrollPrev}
+          className="flex size-10 items-center justify-center border border-gray-300 bg-transparent text-gray-500 transition-colors hover:border-[#2e234a] hover:text-[#2e234a] disabled:opacity-40 disabled:hover:border-gray-300 disabled:hover:text-gray-500"
+        >
+          <ChevronLeft className="size-5" />
+        </button>
+        <button
+          onClick={scrollNext}
+          disabled={!canScrollNext}
+          className="flex size-10 items-center justify-center border border-gray-300 bg-transparent text-gray-500 transition-colors hover:border-[#2e234a] hover:text-[#2e234a] disabled:opacity-40 disabled:hover:border-gray-300 disabled:hover:text-gray-500"
+        >
+          <ChevronRight className="size-5" />
+        </button>
+      </div>
+      <Button className="gap-2 bg-[#2e234a] text-white hover:bg-[#3d2f5e]">
+        Ver todos
+        <ArrowRight className="size-4" />
+      </Button>
+    </div>
+  )
+}
 
 export function PropertyCatalog() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -30,6 +61,15 @@ export function PropertyCatalog() {
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[#2e234a] shadow-sm">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
+          <div className="flex items-center gap-2">
+            <div className="flex size-8 items-center justify-center rounded-lg bg-white text-sm font-bold text-[#2e234a]">
+              IC
+            </div>
+            <span className="text-lg font-bold text-white">
+              ImóveisCatálogo
+            </span>
+          </div>
+
           <nav className="hidden items-center gap-1 md:flex">
             <Button variant="ghost" className="gap-2 text-white hover:bg-white/10 hover:text-white">
               <Building2 className="size-4" />
@@ -50,10 +90,15 @@ export function PropertyCatalog() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <Button variant="outline" className="hidden border-white/30 text-white hover:bg-white/10 hover:text-white sm:inline-flex">
+            <Button
+              variant="outline"
+              className="hidden border-white text-white hover:bg-white hover:text-[#2e234a] sm:inline-flex"
+            >
               Entrar
             </Button>
-            <Button className="hidden bg-white text-[#2e234a] hover:bg-white/90 sm:inline-flex">Cadastrar</Button>
+            <Button className="hidden bg-white text-[#2e234a] hover:bg-white/90 sm:inline-flex">
+              Cadastrar
+            </Button>
             <Button
               variant="ghost"
               size="icon"
@@ -89,7 +134,7 @@ export function PropertyCatalog() {
                 Comercial
               </Button>
               <hr className="my-2 border-white/20" />
-              <Button variant="outline" className="justify-start border-white/30 text-white hover:bg-white/10 hover:text-white">
+              <Button variant="outline" className="justify-start border-white text-white hover:bg-white hover:text-[#2e234a]">
                 Entrar
               </Button>
               <Button className="justify-start bg-white text-[#2e234a] hover:bg-white/90">Cadastrar</Button>
@@ -126,57 +171,45 @@ export function PropertyCatalog() {
         </div>
 
         {/* Featured Carousel */}
-        <section className="mb-10">
-          <h2 className="mb-4 text-lg font-semibold">Destaques</h2>
-          <div className="relative">
-            <Carousel
-              opts={{
-                align: "start",
-                loop: true,
-              }}
-              className="w-full"
-            >
-              <CarouselContent className="-ml-3">
-                {properties.map((property) => (
-                  <CarouselItem
-                    key={property.id}
-                    className="basis-[85vw] pl-3 sm:basis-[45vw] lg:basis-[30vw]"
-                  >
-                    <PropertyCard property={property} className="h-full" />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="left-0 size-9 -translate-x-1/2 border-0 bg-[#2e234a] text-white shadow-lg hover:bg-[#3d2f5e]" />
-              <CarouselNext className="right-0 size-9 translate-x-1/2 border-0 bg-[#2e234a] text-white shadow-lg hover:bg-[#3d2f5e]" />
-            </Carousel>
-          </div>
+        <section className="mb-10 rounded-xl bg-[#ededed] p-6">
+          <h2 className="mb-1 text-lg font-semibold">Destaques</h2>
+          <Carousel
+            opts={{ align: "start", loop: true }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-3">
+              {properties.filter(p => p.featured).map((property) => (
+                <CarouselItem
+                  key={property.id}
+                  className="basis-[85vw] pl-3 sm:basis-[45vw] lg:basis-[30vw]"
+                >
+                  <PropertyCard property={property} className="h-full" />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+          <CarouselControls />
         </section>
 
         {/* All Properties Carousel */}
-        <section>
-          <h2 className="mb-4 text-lg font-semibold">Todos os Imóveis</h2>
-          <div className="relative">
-            <Carousel
-              opts={{
-                align: "start",
-                loop: true,
-              }}
-              className="w-full"
-            >
-              <CarouselContent className="-ml-3">
-                {[...properties].reverse().map((property) => (
-                  <CarouselItem
-                    key={property.id}
-                    className="basis-[85vw] pl-3 sm:basis-[45vw] lg:basis-[30vw]"
-                  >
-                    <PropertyCard property={property} className="h-full" />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="left-0 size-9 -translate-x-1/2 border-0 bg-[#2e234a] text-white shadow-lg hover:bg-[#3d2f5e]" />
-              <CarouselNext className="right-0 size-9 translate-x-1/2 border-0 bg-[#2e234a] text-white shadow-lg hover:bg-[#3d2f5e]" />
-            </Carousel>
-          </div>
+        <section className="rounded-xl bg-[#ededed] p-6">
+          <h2 className="mb-1 text-lg font-semibold">Todos os Imóveis</h2>
+          <Carousel
+            opts={{ align: "start", loop: true }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-3">
+              {properties.map((property) => (
+                <CarouselItem
+                  key={property.id}
+                  className="basis-[85vw] pl-3 sm:basis-[45vw] lg:basis-[30vw]"
+                >
+                  <PropertyCard property={property} className="h-full" />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+          <CarouselControls />
         </section>
       </main>
 
