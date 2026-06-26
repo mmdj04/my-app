@@ -11,6 +11,10 @@ import {
   ChevronLeft,
   ChevronRight,
   ArrowRight,
+  Phone,
+  Mail,
+  MapPinned,
+  HelpCircle,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { PropertyCard } from "@/components/property-card"
@@ -22,6 +26,12 @@ import {
   useCarousel,
 } from "@/components/ui/carousel"
 import { properties } from "@/data/properties"
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion"
 
 function CarouselControls() {
   const { scrollPrev, scrollNext, canScrollPrev, canScrollNext } = useCarousel()
@@ -75,6 +85,39 @@ export function PropertyCatalog() {
     { number: "120+", label: "Cidades atendidas" },
     { number: "98%", label: "Clientes satisfeitos" },
     { number: "15+", label: "Anos de experiência" },
+  ]
+
+  const faqs = [
+    {
+      question: "Como funciona a pesquisa de imóveis?",
+      answer:
+        "Utilize os filtros de localização, tipo de imóvel, finalidade e faixa de preço para encontrar exatamente o que procura. Você pode navegar pelo carrossel ou ver todos os resultados de uma vez.",
+    },
+    {
+      question: "Posso financiar o imóvel?",
+      answer:
+        "Sim! Trabalhamos com os principais bancos do Brasil para oferecer as melhores condições de financiamento. Entre em contato com nossos especialistas para simular sua parcela.",
+    },
+    {
+      question: "Quais documentos preciso para alugar?",
+      answer:
+        "Para alugar, você precisará de RG, CPF, comprovante de renda (últimos 3 contratos), comprovante de residência e, dependendo do imóvel, fiador ou seguro-fiança locatícia.",
+    },
+    {
+      question: "Como anunciar meu imóvel?",
+      answer:
+        "Clique em \"Anunciar\" no menu principal, preencha os dados do imóvel com fotos e informações e publique gratuitamente. Nosso time revisa e aprova em até 24 horas.",
+    },
+    {
+      question: "Os imóveis têm visita presencial?",
+      answer:
+        "Sim, todas as visitas são agendadas diretamente pelo WhatsApp ou telefone do corretor responsável. Visitas presenciais são realizadas de segunda a sábado, mediante agendamento.",
+    },
+    {
+      question: "Qual a comissão de corretagem?",
+      answer:
+        "A comissão segue a tabela padrão da carteira de corretagem, geralmente entre 4% e 6% do valor do imóvel. Para locações, equivale a uma ou duas parcelas de aluguel.",
+    },
   ]
 
   return (
@@ -195,7 +238,7 @@ export function PropertyCatalog() {
       </div>
 
       {/* Property Carousel Section */}
-      <section className="bg-[#f7f7f7] py-16">
+      <section className="bg-[#f3f2fa] py-16">
         <div className="mx-auto max-w-7xl px-4">
           <h2 className="mb-2 text-3xl font-light tracking-tight md:text-4xl">
             Nossos Imóveis
@@ -238,7 +281,7 @@ export function PropertyCatalog() {
       </section>
 
       {/* Stats Section */}
-      <section className="bg-white py-20">
+      <section className="bg-[#f3f2fa] py-20">
         <div className="mx-auto max-w-7xl px-4">
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             {stats.map((stat, i) => (
@@ -275,87 +318,107 @@ export function PropertyCatalog() {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <section className="bg-[#f3f2fa] py-20">
+        <div className="mx-auto max-w-3xl px-4">
+          <div className="mb-12 text-center">
+            <div className="mb-4 flex justify-center">
+              <div className="flex size-12 items-center justify-center rounded-full bg-[#2e234a]/10">
+                <HelpCircle className="size-6 text-[#2e234a]" />
+              </div>
+            </div>
+            <h2 className="mb-3 text-3xl font-light tracking-tight text-[#2e234a] md:text-4xl">
+              Perguntas frequentes
+            </h2>
+            <p className="text-gray-500">
+              Tire suas dúvidas sobre compra, aluguel e serviços
+            </p>
+          </div>
+
+          <Accordion>
+            {faqs.map((faq, i) => (
+              <AccordionItem key={i} value={`faq-${i}`}>
+                <AccordionTrigger className="text-[#2e234a]">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-gray-500">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer className="bg-[#f7f7f7] pb-8 pt-16">
+      <footer className="bg-[#f3f2fa] py-16">
         <div className="mx-auto max-w-7xl px-4">
-          <div className="rounded-2xl bg-[#1a1432] p-10 md:p-14">
-            {/* Footer top */}
-            <div className="mb-12 flex items-center gap-3">
-              <div className="flex size-10 items-center justify-center rounded-lg bg-white text-sm font-bold text-[#2e234a]">
-                IC
-              </div>
-              <span className="text-xl font-semibold tracking-tight text-white">
-                ImóveisCatálogo
-              </span>
+          <div className="mb-12 flex items-center gap-3">
+            <div className="flex size-10 items-center justify-center rounded-lg bg-[#2e234a] text-sm font-bold text-white">
+              IC
+            </div>
+            <span className="text-xl font-semibold tracking-tight text-[#2e234a]">
+              ImóveisCatálogo
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
+            <div className="max-w-xs">
+              <p className="text-sm leading-relaxed text-gray-500">
+                O melhor portal de imóveis do Brasil. Encontre sua casa dos
+                sonhos com segurança e facilidade.
+              </p>
             </div>
 
-            {/* Footer columns */}
-            <div className="grid grid-cols-2 gap-10 md:grid-cols-5">
-              <div>
-                <h3 className="mb-5 text-[11px] font-semibold tracking-widest uppercase text-white/40">
-                  Imóveis
-                </h3>
-                <ul className="space-y-3 text-sm text-white/70">
-                  <li><a href="#" className="transition-colors hover:text-white">Apartamentos</a></li>
-                  <li><a href="#" className="transition-colors hover:text-white">Casas</a></li>
-                  <li><a href="#" className="transition-colors hover:text-white">Terrenos</a></li>
-                  <li><a href="#" className="transition-colors hover:text-white">Comerciais</a></li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="mb-5 text-[11px] font-semibold tracking-widest uppercase text-white/40">
-                  Serviços
-                </h3>
-                <ul className="space-y-3 text-sm text-white/70">
-                  <li><a href="#" className="transition-colors hover:text-white">Financiamento</a></li>
-                  <li><a href="#" className="transition-colors hover:text-white">Seguros</a></li>
-                  <li><a href="#" className="transition-colors hover:text-white">Avaliação</a></li>
-                  <li><a href="#" className="transition-colors hover:text-white">Reforma</a></li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="mb-5 text-[11px] font-semibold tracking-widest uppercase text-white/40">
-                  Empresa
-                </h3>
-                <ul className="space-y-3 text-sm text-white/70">
-                  <li><a href="#" className="transition-colors hover:text-white">Sobre nós</a></li>
-                  <li><a href="#" className="transition-colors hover:text-white">Carreiras</a></li>
-                  <li><a href="#" className="transition-colors hover:text-white">Imprensa</a></li>
-                  <li><a href="#" className="transition-colors hover:text-white">Contato</a></li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="mb-5 text-[11px] font-semibold tracking-widest uppercase text-white/40">
-                  Legal
-                </h3>
-                <ul className="space-y-3 text-sm text-white/70">
-                  <li><a href="#" className="transition-colors hover:text-white">Privacidade</a></li>
-                  <li><a href="#" className="transition-colors hover:text-white">Termos</a></li>
-                  <li><a href="#" className="transition-colors hover:text-white">Cookies</a></li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="mb-5 text-[11px] font-semibold tracking-widest uppercase text-white/40">
-                  Redes
-                </h3>
-                <ul className="space-y-3 text-sm text-white/70">
-                  <li><a href="#" className="transition-colors hover:text-white">Instagram</a></li>
-                  <li><a href="#" className="transition-colors hover:text-white">LinkedIn</a></li>
-                  <li><a href="#" className="transition-colors hover:text-white">YouTube</a></li>
-                </ul>
-              </div>
+            <div>
+              <h3 className="mb-4 text-xs font-semibold tracking-widest uppercase text-[#2e234a]">
+                Comprar
+              </h3>
+              <ul className="space-y-3 text-sm text-gray-500">
+                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Apartamentos</a></li>
+                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Casas</a></li>
+                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Terrenos</a></li>
+                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Comerciais</a></li>
+              </ul>
             </div>
 
-            {/* Separator */}
-            <hr className="my-10 border-white/10" />
+            <div>
+              <h3 className="mb-4 text-xs font-semibold tracking-widest uppercase text-[#2e234a]">
+                Alugar
+              </h3>
+              <ul className="space-y-3 text-sm text-gray-500">
+                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Apartamentos</a></li>
+                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Casas</a></li>
+                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Salas Comerciais</a></li>
+                <li><a href="#" className="transition-colors hover:text-[#2e234a]">Lofts</a></li>
+              </ul>
+            </div>
 
-            {/* Copyright */}
-            <div className="text-xs text-white/30">
-              © 2026 ImóveisCatálogo. Todos os direitos reservados.
+            <div>
+              <h3 className="mb-4 text-xs font-semibold tracking-widest uppercase text-[#2e234a]">
+                Contato
+              </h3>
+              <ul className="space-y-3 text-sm text-gray-500">
+                <li className="flex items-center gap-2">
+                  <Phone className="size-3.5" /> (11) 99999-0000
+                </li>
+                <li className="flex items-center gap-2">
+                  <Mail className="size-3.5" /> contato@imovelcatalogo.com
+                </li>
+                <li className="flex items-center gap-2">
+                  <MapPinned className="size-3.5" /> São Paulo, SP
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <hr className="my-10 border-gray-200" />
+
+          <div className="flex flex-col items-center justify-between gap-4 text-xs text-gray-400 sm:flex-row">
+            <p>&copy; 2026 ImóveisCatálogo. Todos os direitos reservados.</p>
+            <div className="flex gap-6">
+              <a href="#" className="transition-colors hover:text-[#2e234a]">Termos de uso</a>
+              <a href="#" className="transition-colors hover:text-[#2e234a]">Privacidade</a>
             </div>
           </div>
         </div>
